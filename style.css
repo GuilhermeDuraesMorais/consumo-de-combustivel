@@ -79,8 +79,14 @@ body {
     max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
-    padding: 1rem 1.5rem;
+    padding: 1rem; /* Adjusted for mobile */
 }
+@media (min-width: 640px) { /* sm breakpoint */
+    .container {
+        padding: 1rem 1.5rem; /* Restore original for larger screens */
+    }
+}
+
 
 /* Estilização de Card */
 .card {
@@ -95,12 +101,24 @@ body {
 /* Navbar */
 nav.card {
     margin-bottom: 1.5rem;
-    padding: 0.85rem 1.5rem;
+    padding: 0.85rem 1rem; /* Adjusted side padding for consistency with .container */
 }
-nav .flex > span {
-    font-size: 1.25rem;
+@media (min-width: 640px) { /* sm breakpoint */
+    nav.card {
+        padding: 0.85rem 1.5rem; /* Restore original for larger screens */
+    }
+}
+
+nav .flex > span { /* Title "Controle de Abastecimento" */
+    font-size: 1.1rem; /* Slightly reduce for mobile */
     font-weight: 600;
 }
+@media (min-width: 640px) { /* sm */
+    nav .flex > span {
+        font-size: 1.25rem; /* Original size */
+    }
+}
+
 nav #menu {
     margin-top: 0.75rem;
 }
@@ -145,17 +163,41 @@ nav #menu a i.fas {
     background-color: rgba(128,128,128,0.1);
     color: var(--primary);
 }
+
 #user-info {
-    font-size: 0.875rem;
+    font-size: 0.8rem; /* Slightly smaller by default */
     color: var(--text-muted);
     white-space: nowrap;
-    margin-right: 1rem;
+    margin-right: 0.5rem; /* Reduced margin */
+    max-width: 100px; /* Max width for very small screens */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+@media (min-width: 375px) { /* Small mobile landscape / larger portrait */
+    #user-info {
+        max-width: 140px; /* Allow more space */
+        margin-right: 0.75rem;
+    }
+}
+@media (min-width: 640px) { /* sm */
+    #user-info {
+        font-size: 0.875rem; /* Original size for sm and up */
+        margin-right: 1rem; /* Original margin */
+        max-width: none; /* Remove max-width on larger screens */
+    }
+}
+
 
 /* Área de Conteúdo Principal */
 #content.card {
-    padding: 2rem;
+    padding: 1.5rem; /* Adjusted for mobile */
 }
+@media (min-width: 768px) { /* md */
+    #content.card {
+        padding: 2rem; /* Restore original for larger screens */
+    }
+}
+
 
 /* Títulos no Conteúdo */
 #content h2, #content h3 {
@@ -165,13 +207,24 @@ nav #menu a i.fas {
     margin-top: 0;
 }
 #content h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1.75rem;
+    font-size: 1.3rem; /* Adjusted for mobile */
+    margin-bottom: 1.25rem; /* Adjusted for mobile */
 }
 #content h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1.25rem;
+    font-size: 1.1rem; /* Adjusted for mobile */
+    margin-bottom: 1rem; /* Adjusted for mobile */
 }
+@media (min-width: 768px) { /* md */
+    #content h2 {
+        font-size: 1.6rem; /* Restore original */
+        margin-bottom: 1.75rem; /* Restore original */
+    }
+    #content h3 {
+        font-size: 1.3rem; /* Restore original */
+        margin-bottom: 1.25rem; /* Restore original */
+    }
+}
+
 #content h2 i.fas, #content h3 i.fas {
     margin-right: 0.75rem;
     font-size: 0.9em;
@@ -230,7 +283,7 @@ html.dark select {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.55rem 1.1rem;
+    padding: 0.55rem 1rem; /* Slightly reduce horizontal padding */
     border: 1px solid transparent;
     border-radius: var(--default-border-radius);
     font-weight: 500;
@@ -241,6 +294,12 @@ html.dark select {
     font-size: 0.9rem;
     line-height: 1.5;
 }
+@media (min-width: 768px) { /* md */
+    .btn {
+        padding: 0.55rem 1.1rem; /* Restore original padding */
+    }
+}
+
 .btn i.fas {
     margin-right: 0.5rem;
     font-size: 0.9em;
@@ -304,23 +363,41 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Slightly smaller font for tables on mobile */
 }
+@media (min-width: 768px) { /* md */
+    table {
+        font-size: 0.9rem; /* Restore original font size */
+    }
+}
+
 th, td {
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 0.5rem; /* Reduced padding for mobile */
     text-align: left;
     border-bottom: 1px solid var(--border);
     white-space: nowrap;
     vertical-align: middle;
 }
+@media (min-width: 768px) { /* md */
+    th, td {
+        padding: 0.75rem 1rem; /* Restore original padding */
+    }
+}
+
 th {
     color: var(--text-muted);
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.7rem; /* Adjusted for mobile */
     letter-spacing: 0.05em;
     background-color: rgba(0,0,0,0.02);
 }
+@media (min-width: 768px) { /* md */
+    th {
+        font-size: 0.75rem; /* Restore original */
+    }
+}
+
 html.dark th {
     background-color: rgba(255,255,255,0.03);
 }
@@ -347,32 +424,56 @@ td .btn:last-child {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 1.5rem;
+    padding: 1rem; /* Adjusted for mobile */
 }
+@media (min-width: 640px) { /* sm */
+    .login-container {
+        padding: 1.5rem; /* Restore original */
+    }
+}
+
 .login-box {
     width: 100%;
     max-width: 400px;
-    padding: 2rem;
+    padding: 1.5rem; /* Adjusted for mobile */
 }
+@media (min-width: 640px) { /* sm */
+    .login-box {
+        padding: 2rem; /* Restore original */
+    }
+}
+
 .login-box h2 {
-    font-size: 1.75rem;
-    margin-bottom: 2rem;
+    font-size: 1.5rem; /* Adjusted for mobile */
+    margin-bottom: 1.5rem; /* Adjusted for mobile */
     justify-content: center;
 }
+@media (min-width: 640px) { /* sm */
+    .login-box h2 {
+        font-size: 1.75rem; /* Restore original */
+        margin-bottom: 2rem; /* Restore original */
+    }
+}
+
 .login-box .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.7rem 1.25rem; /* Adjusted for mobile */
+}
+@media (min-width: 640px) { /* sm */
+    .login-box .btn {
+        padding: 0.75rem 1.5rem; /* Restore original */
+    }
 }
 
 
 /* Campos de input durante edição na tabela */
 .edit-input {
     padding: 0.3rem 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Match table font size */
     border-radius: calc(var(--default-border-radius) - 0.1rem);
-    max-width: 130px;
+    max-width: 120px; /* Slightly reduce max-width if needed */
 }
-td .edit-input[type="date"] { max-width: 150px; }
-td .edit-input[type="text"] { max-width: 110px; }
+td .edit-input[type="date"] { max-width: 140px; }
+td .edit-input[type="text"] { max-width: 100px; }
 
 
 /* Tabela Responsiva */
@@ -390,11 +491,21 @@ td .edit-input[type="text"] { max-width: 110px; }
 }
 .table-responsive th:first-child,
 .table-responsive td:first-child {
-     padding-left: 1.25rem;
+     padding-left: 0.75rem; /* Adjusted for mobile */
 }
 .table-responsive th:last-child,
 .table-responsive td:last-child {
-     padding-right: 1.25rem;
+     padding-right: 0.75rem; /* Adjusted for mobile */
+}
+@media (min-width: 768px) { /* md */
+    .table-responsive th:first-child,
+    .table-responsive td:first-child {
+        padding-left: 1.25rem; /* Restore original */
+    }
+    .table-responsive th:last-child,
+    .table-responsive td:last-child {
+        padding-right: 1.25rem; /* Restore original */
+    }
 }
 
 
@@ -403,7 +514,11 @@ td .edit-input[type="text"] { max-width: 110px; }
 .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
 .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.gap-4 { gap: 1.25rem; }
+
+.gap-4 { gap: 1rem; } /* Adjusted default gap */
+@media (min-width: 768px) { /* md */
+    .gap-4 { gap: 1.25rem; } /* Restore original for md and up */
+}
 
 @media (min-width: 768px) { /* md */
     .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -418,36 +533,43 @@ td .edit-input[type="text"] { max-width: 110px; }
 .border.border-dashed {
     border-style: dashed;
     border-color: var(--border);
-    padding: 1.5rem;
-    margin-bottom: 1.75rem;
+    padding: 1.25rem; /* Adjusted for mobile */
+    margin-bottom: 1.5rem; /* Adjusted for mobile */
     border-radius: var(--default-border-radius);
 }
+@media (min-width: 768px) { /* md */
+    .border.border-dashed {
+        padding: 1.5rem; /* Restore original */
+        margin-bottom: 1.75rem; /* Restore original */
+    }
+}
+
 .border.border-dashed label {
     margin-bottom: 0.35rem;
 }
 
 /* Container dos botões de filtro (Histórico e Gráfico) e botões PDF */
+/* Original behavior (flex-row, wrap) is generally good for responsiveness. */
+/* Stacking them (flex-direction: column) can be an alternative if preferred for mobile */
 .filter-button-group,
 .pdf-button-group {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allows buttons to wrap to the next line if they don't fit */
     gap: 0.75rem;
-    align-items: flex-end;
+    align-items: flex-end; /* Aligns items to the bottom if they wrap and have different heights */
 }
 
 .filter-button-group .btn,
 .pdf-button-group .btn {
-    flex-grow: 1;
-    flex-basis: 0;
-    min-width: 120px;
+    flex-grow: 1; /* Allows buttons to grow and share space in a row */
+    flex-basis: 0; /* Distributes space based on flex-grow, after considering content size */
+    min-width: 110px; /* Ensures buttons don't become too small */
 }
 
 @media (min-width: 768px) { /* md - Desktop */
     .filter-button-group .btn,
     .pdf-button-group .btn {
-        flex-grow: 0; /* Em desktop, permite que w-auto (do JS) funcione */
-                     /* Se quiserem a mesma largura em desktop, comente flex-grow:0 e md:w-auto no JS,
-                        e use flex-grow: 1 aqui. Ou defina uma largura fixa. */
+        flex-grow: 0; /* On desktop, let md:w-auto (from JS) control width; don't grow to fill. */
     }
 }
 
@@ -455,19 +577,35 @@ td .edit-input[type="text"] { max-width: 110px; }
 /* Página de gráficos */
 #grafico-container {
     position: relative;
-    min-height: 420px;
+    height: 55vh; /* Default height based on viewport */
+    min-height: 280px; /* Minimum pixel height for very small/short screens */
+    max-height: 400px; /* Maximum pixel height on mobile portrait */
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem; /* Reduce padding for more chart space on mobile */
     border: 1px solid var(--border);
     border-radius: var(--default-border-radius);
     background-color: var(--card-bg);
 }
+@media (min-width: 768px) { /* md */
+    #grafico-container {
+        height: auto; /* Let Chart.js and content determine height */
+        min-height: 400px; /* Restore a larger min-height for desktop */
+        max-height: none; /* No max-height for desktop unless desired */
+        padding: 1rem; /* Restore original padding */
+    }
+}
+
 
 #grafico-vazio, #historico-vazio {
     color: var(--text-muted);
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem; /* Adjusted for mobile */
     text-align: center;
     font-style: italic;
+}
+@media (min-width: 768px) { /* md */
+    #grafico-vazio, #historico-vazio {
+        padding: 2rem 1rem; /* Restore */
+    }
 }
 
 
@@ -493,7 +631,7 @@ td .edit-input[type="text"] { max-width: 110px; }
 .mr-2 { margin-right: 0.5rem; }
 
 .space-y-2 > * + * { margin-top: 0.5rem; }
-/* space-x-* agora é menos relevante para os grupos de botões devido ao uso de 'gap' */
+/* space-x-* now is less relevant for the button groups due to use of 'gap' */
 .space-x-2 > * + * { margin-left: 0.5rem; }
 .space-x-4 > * + * { margin-left: 1rem; }
 
