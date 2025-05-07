@@ -35,7 +35,7 @@ html.dark {
     --text: #f3f4f6; /* Tailwind Gray 100 */
     --text-muted: #9ca3af; /* Tailwind Gray 400 */
     --border: #374151; /* Tailwind Gray 700 */
-    --input-bg: #374151; /* Tailwind Gray 700 (pode ser um pouco mais claro se preferir, ex: #4b5563 Gray 600) */
+    --input-bg: #374151; /* Tailwind Gray 700 */
     --primary: #60a5fa; /* Tailwind Blue 400 (mais claro para contraste) */
     --primary-hover: #3b82f6; /* Tailwind Blue 500 */
     --danger: #f87171; /* Tailwind Red 400 (mais claro) */
@@ -53,9 +53,9 @@ html.dark {
 
     /* Cores para menu (hover) */
     --menu-item-hover-bg-dark: rgba(var(--primary-dark-rgb), 0.12);
-    --menu-item-hover-text-dark: var(--primary); /* que é --primary-dark */
-    --danger-text-dark: var(--danger); /* Usado para texto do logout */
-    --danger-bg-hover-dark: rgba(248, 113, 113, 0.12); /* Para hover do logout */
+    --menu-item-hover-text-dark: var(--primary); 
+    --danger-text-dark: var(--danger); 
+    --danger-bg-hover-dark: rgba(248, 113, 113, 0.12); 
 }
 
 /* Estilos Globais */
@@ -64,7 +64,7 @@ html.dark {
 }
 
 body {
-    background-color: var(--bg, var(--bg-light)); /* Fallback para tema claro */
+    background-color: var(--bg, var(--bg-light)); 
     color: var(--text, var(--text-light));
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -123,7 +123,7 @@ nav #menu {
     margin-top: 0.75rem;
 }
 nav #menu a {
-    color: var(--text, var(--text-light)); /* Texto padrão dos links */
+    color: var(--text, var(--text-light)); 
     padding: 0.6rem 1rem;
     border-radius: var(--default-border-radius);
     transition: background-color 0.15s ease, color 0.15s ease;
@@ -136,13 +136,6 @@ nav #menu a {
 nav #menu a:last-child {
     margin-bottom: 0;
 }
-
-/* Hover para links de menu normais (usando classes utilitárias) */
-/* .hover\:bg-gray-200 e .dark\:hover\:bg-gray-600 são definidos mais abaixo */
-
-/* Hover específico para o link de Logout (usando classes utilitárias) */
-/* .text-red-600, .dark\:text-red-400, .hover\:bg-red-100, .dark\:hover\:bg-red-900 são definidos mais abaixo */
-
 
 nav #menu a i.fas {
     margin-right: 0.75rem;
@@ -170,23 +163,20 @@ nav #menu a i.fas {
     color: var(--text-muted, var(--text-muted-light));
     white-space: nowrap;
     margin-right: 0.5rem;
-    max-width: 100px;
+    /* max-width será controlado por hidden/md:inline */
     overflow: hidden;
     text-overflow: ellipsis;
 }
 @media (min-width: 375px) {
+    /* #user-info max-width for small mobile landscape / larger portrait, IF visible */
+}
+@media (min-width: 640px) { /* sm breakpoint */
     #user-info {
-        max-width: 140px;
-        margin-right: 0.75rem;
+        font-size: 0.875rem; /* Original size for sm and up */
+        margin-right: 1rem; /* Original margin */
     }
 }
-@media (min-width: 640px) {
-    #user-info {
-        font-size: 0.875rem;
-        margin-right: 1rem;
-        max-width: none;
-    }
-}
+
 
 /* Área de Conteúdo Principal */
 #content.card {
@@ -230,7 +220,7 @@ nav #menu a i.fas {
     color: var(--primary, var(--primary-light));
 }
 html.dark #content h2 i.fas, html.dark #content h3 i.fas {
-    color: var(--primary); /* Já definido por html.dark */
+    color: var(--primary); 
 }
 
 /* Formulários */
@@ -322,7 +312,7 @@ html.dark .btn:focus {
     background-color: var(--primary-hover, var(--primary-hover-light));
     border-color: var(--primary-hover, var(--primary-hover-light));
 }
-html.dark .btn-primary { /* Texto escuro em fundo claro para tema dark */
+html.dark .btn-primary { 
     color: var(--btn-text-on-light-bg-dark, #111827);
 }
 html.dark .btn-primary:hover {
@@ -338,7 +328,7 @@ html.dark .btn-primary:hover {
     background-color: var(--success-hover, var(--success-hover-light));
     border-color: var(--success-hover, var(--success-hover-light));
 }
-html.dark .btn-success { /* Texto escuro em fundo claro para tema dark */
+html.dark .btn-success { 
     color: var(--btn-text-on-light-bg-dark, #111827);
 }
 html.dark .btn-success:hover {
@@ -354,7 +344,7 @@ html.dark .btn-success:hover {
     background-color: var(--danger-hover, var(--danger-hover-light));
     border-color: var(--danger-hover, var(--danger-hover-light));
 }
-html.dark .btn-danger { /* Texto escuro em fundo claro para tema dark */
+html.dark .btn-danger { 
     color: var(--btn-text-on-light-bg-dark, #111827);
 }
 html.dark .btn-danger:hover {
@@ -370,7 +360,7 @@ html.dark .btn-danger:hover {
     background-color: var(--secondary-hover, var(--secondary-hover-light));
     border-color: var(--secondary-hover, var(--secondary-hover-light));
 }
-html.dark .btn-secondary { /* Texto claro em fundo médio-escuro OK */
+html.dark .btn-secondary { 
     color: var(--text, var(--text-dark));
 }
 
@@ -494,7 +484,7 @@ td .btn:last-child {
 .edit-input {
     padding: 0.3rem 0.5rem;
     font-size: 0.85rem;
-    border-radius: calc(var(--default-border-radius) - 0.2rem); /* Slightly smaller for tight spaces */
+    border-radius: calc(var(--default-border-radius) - 0.2rem); 
     max-width: 120px;
 }
 td .edit-input[type="date"] { max-width: 140px; }
@@ -545,12 +535,17 @@ td .edit-input[type="text"] { max-width: 100px; }
     .gap-4 { gap: 1.25rem; }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) { /* md breakpoint */
     .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .md\:col-span-2 { grid-column: span 2 / span 2; }
     .md\:col-span-3 { grid-column: span 3 / span 3; }
     .md\:w-auto { width: auto; }
+    .md\:inline { display: inline; }
+    .md\:inline-block { display: inline-block; }
+    .md\:block { display: block; }
+    .md\:flex { display: flex; }
+    .md\:hidden { display: none; }
 }
 
 
@@ -678,33 +673,31 @@ td .edit-input[type="text"] { max-width: 100px; }
 .focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
 
 /* Cores (Classes utilitárias para sobrepor ou casos específicos) */
-.text-blue-500 { color: var(--primary, var(--primary-light)); } /* Originalmente #007bff */
-.text-red-500 { color: var(--danger, var(--danger-light)); } /* Originalmente #dc3545 */
+.text-blue-500 { color: var(--primary, var(--primary-light)); } /* Cor para ícone da bomba de gasolina */
+.text-red-500 { color: var(--danger, var(--danger-light)); } /* Cor para ícone PDF */
 
-/* Ajuste para as classes text-red-600 e text-red-400 usadas no link de Logout */
-.text-red-600 { color: var(--danger-text-light, var(--danger-light)); } /* Deve ser o texto inicial do logout no tema claro */
-html.dark .text-red-400 { color: var(--danger-text-dark, var(--danger)); } /* Deve ser o texto inicial do logout no tema escuro */
+/* Cores para texto de Logout no menu */
+.text-red-600 { color: var(--danger-text-light, var(--danger-light)); } 
+html.dark .text-red-400 { color: var(--danger-text-dark, var(--danger)); }
 
 
-/* Hovers (Classes utilitárias para sobrepor ou casos específicos) */
-/* Para links de menu normais */
-.hover\:bg-gray-200:hover {
+/* Hovers para links de menu */
+.hover\:bg-gray-200:hover { /* Links normais do menu - tema claro */
     background-color: var(--menu-item-hover-bg-light);
-    color: var(--menu-item-hover-text-light) !important; /* !important para garantir sobreposição se necessário */
+    color: var(--menu-item-hover-text-light) !important; 
 }
-html.dark .dark\:hover\:bg-gray-600:hover {
+html.dark .dark\:hover\:bg-gray-600:hover { /* Links normais do menu - tema escuro */
     background-color: var(--menu-item-hover-bg-dark);
     color: var(--menu-item-hover-text-dark) !important;
 }
 
-/* Para link de Logout */
-.hover\:bg-red-100:hover {
+.hover\:bg-red-100:hover { /* Link de logout - tema claro */
     background-color: var(--danger-bg-hover-light);
-    color: var(--danger-text-light) !important; /* Mantém a cor do texto de perigo */
+    color: var(--danger-text-light) !important; 
 }
-html.dark .dark\:hover\:bg-red-900:hover {
+html.dark .dark\:hover\:bg-red-900:hover { /* Link de logout - tema escuro */
     background-color: var(--danger-bg-hover-dark);
-    color: var(--danger-text-dark) !important; /* Mantém a cor do texto de perigo */
+    color: var(--danger-text-dark) !important; 
 }
 
 

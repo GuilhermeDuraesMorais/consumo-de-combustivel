@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <i class="fas fa-gas-pump mr-2 text-xl text-blue-500"></i> Controle de Abastecimento
                                 </span>
                                 <div class="flex items-center space-x-4">
-                                    <span id="user-info" class="text-sm">Olá, ${user.nome} (${user.cs})</span>
+                                    <span id="user-info" class="text-sm hidden md:inline">Olá, ${user.nome} (${user.cs})</span>
                                     <button id="menu-button" class="text-xl focus:outline-none">
                                         <i class="fas fa-bars"></i>
                                     </button>
@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let abastecimentos = JSON.parse(localStorage.getItem('abastecimentos') || '[]');
             abastecimentos.push(abastecimento);
-            abastecimentos.sort((a, b) => new Date(b.data) - new Date(a.data));
+            abastecimentos.sort((a, b) => new Date(b.data) - new Date(a.data)); // Ordena por data decrescente
             localStorage.setItem('abastecimentos', JSON.stringify(abastecimentos));
 
             alert('Abastecimento salvo com sucesso!');
@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     abastecimentos[originalIndex] = newData;
-                    abastecimentos.sort((a, b) => new Date(b.data) - new Date(a.data));
+                    abastecimentos.sort((a, b) => new Date(b.data) - new Date(a.data)); // Re-sort after edit
                     localStorage.setItem('abastecimentos', JSON.stringify(abastecimentos));
                     editingIndex = null;
                     carregarHistorico();
@@ -653,7 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert('Não foi possível compartilhar o PDF. Verifique as permissões ou tente fazer o download.');
                     }
                 }
-            } else if (navigator.share) {
+            } else if (navigator.share) { // Fallback for browsers that support share but not canShare with files
                 try {
                     await navigator.share(shareData);
                 } catch (err) {
@@ -702,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const isDarkMode = document.documentElement.classList.contains('dark');
             const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-            const textColor = isDarkMode ? '#f8f9fa' : '#212529';
+            const textColor = isDarkMode ? '#f3f4f6' : '#1f2937'; // Usando cores do tema atualizado
 
             consumoChartInstance = new Chart(ctx, {
                 type: 'line',
@@ -712,16 +712,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         {
                             label: 'Consumo Real (L/km)',
                             data: dataConsumo,
-                            borderColor: 'rgb(54, 162, 235)',
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: isDarkMode ? '#60a5fa' : '#2563eb', // Azul tema dark/light
+                            backgroundColor: isDarkMode ? 'rgba(96, 165, 250, 0.2)' : 'rgba(37, 99, 235, 0.2)',
                             tension: 0.1,
                             fill: false,
                         },
                         {
                             label: `Meta Consumo (${metaConsumoTargetLKM.toFixed(2)} L/km)`,
                             data: dataMeta,
-                            borderColor: 'rgb(255, 99, 132)',
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: isDarkMode ? '#f87171' : '#dc2626', // Vermelho tema dark/light
+                            backgroundColor: isDarkMode ? 'rgba(248, 113, 113, 0.2)' : 'rgba(220, 38, 38, 0.2)',
                             borderDash: [5, 5],
                             pointRadius: 0,
                             tension: 0.1,
@@ -836,13 +836,14 @@ document.addEventListener('DOMContentLoaded', () => {
             carregarDadosParaGrafico();
         });
 
+        // Define datas padrão para os filtros de gráfico ao carregar a página
         const hoje = new Date();
         const umMesAtras = new Date();
         umMesAtras.setMonth(hoje.getMonth() - 1);
         if(filtroDataInicioGrafico && !filtroDataInicioGrafico.value) filtroDataInicioGrafico.value = umMesAtras.toISOString().split('T')[0];
         if(filtroDataFimGrafico && !filtroDataFimGrafico.value) filtroDataFimGrafico.value = hoje.toISOString().split('T')[0];
         
-        carregarDadosParaGrafico();
+        carregarDadosParaGrafico(); // Carga inicial do gráfico
     }
 
     // --- Carregamento Inicial ---
