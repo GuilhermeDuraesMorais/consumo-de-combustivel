@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (user && page !== 'login') {
                 pageContent += `
                     <div class="container mx-auto p-4">
-                        <nav class="card p-4 mb-6">
+                        <nav class="card mb-6">
                             <div class="flex items-center justify-between">
                                 <span class="text-lg font-semibold flex items-center">
                                     <i class="fas fa-gas-pump mr-2 text-xl text-blue-500"></i> Controle de Abastecimento
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <a href="#" id="logout" class="block px-4 py-2 rounded hover:bg-red-100 dark:hover:bg-red-900 text-red-600 dark:text-red-400"><i class="fas fa-sign-out-alt w-5 mr-2"></i>Sair</a>
                             </div>
                         </nav>
-                        <main id="content" class="card p-6">
+                        <main id="content" class="card">
                             <!-- Conteúdo específico da página vai aqui -->
                         </main>
                     </div>
@@ -86,13 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'login':
                     mainContent = `
                         <div class="login-container">
-                            <div class="login-box card p-8">
+                            <div class="login-box card">
                                 <h2 class="text-2xl font-semibold text-center mb-6">
                                     <i class="fas fa-lock mr-2"></i>Login
                                 </h2>
                                 <div class="mb-4">
                                     <label for="cs">CS:</label>
-                                    <input type="text" id="cs" placeholder="Digite seu CS">
+                                    <input type="text" id="cs" placeholder="Digite seu CS (apenas números)" pattern="[0-9]*" inputmode="numeric">
                                 </div>
                                 <div class="mb-6">
                                     <label for="nome">Nome:</label>
@@ -311,6 +311,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const cs = csInput.value.trim();
             const nome = nomeInput.value.trim();
             if (cs && nome) {
+                 if (csInput.pattern && !new RegExp(`^${csInput.pattern}$`).test(cs)) {
+                    alert('CS deve conter apenas números.');
+                    csInput.focus();
+                    return;
+                }
                 user = { cs: cs, nome: nome };
                 localStorage.setItem('user', JSON.stringify(user));
                 loadPage('abastecimento');
@@ -323,6 +328,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 loginButton.click();
+            }
+        });
+         csInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                nomeInput.focus(); // Move focus to name input or trigger login
             }
         });
     }
@@ -428,9 +439,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${abastecimento.cs}</td>
                         <td><input type="date" class="edit-input" value="${abastecimento.data || ''}" data-field="data"></td>
                         <td><input type="text" class="edit-input" value="${abastecimento.frota || ''}" data-field="frota"></td>
-                        <td><input type="number" class="edit-input" value="${abastecimento.kmInicial || ''}" data-field="kmInicial"></td>
-                        <td><input type="number" class="edit-input" value="${abastecimento.kmFinal || ''}" data-field="kmFinal"></td>
-                        <td><input type="number" step="0.01" class="edit-input" value="${abastecimento.litros || ''}" data-field="litros"></td>
+                        <td><input type="number" class="edit-input" value="${abastecimento.kmInicial || ''}" data-field="kmInicial" step="1" min="0"></td>
+                        <td><input type="number" class="edit-input" value="${abastecimento.kmFinal || ''}" data-field="kmFinal" step="1" min="0"></td>
+                        <td><input type="number" step="0.01" class="edit-input" value="${abastecimento.litros || ''}" data-field="litros" min="0"></td>
                         <td>${consumoDisplay} L/km</td>
                         <td class="whitespace-nowrap">
                             <button class="btn btn-success btn-sm salvar-button" data-original-index="${originalIndex}"><i class="fas fa-check"></i></button>
